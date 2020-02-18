@@ -113,11 +113,11 @@ def evaluate():
                                     transforms.Normalize([0], [0.5])
                                     ])
 
-    dataset = FashionMNIST("./data/", train=False, transform=transform_test, download=True)
+    dataset = FashionMNIST(os.path.join(repo_path, "./data/"), train=False, transform=transform_test, download=True)
     testloader = DataLoader(dataset, batch_size=512, shuffle=False)
 
     model = MLP(10)
-    model.load_state_dict(torch.load("./models/MLP.pt", map_location=torch.device('cpu')))
+    model.load_state_dict(torch.load(os.path.join(repo_path, "./models/MLP.pt"), map_location=torch.device('cpu')))
     loss, gt, pred = test(model, testloader)
     print("\nAccuracy on Test Data : {}\n".format(np.mean(np.array(gt) == np.array(pred))))
 
@@ -127,11 +127,11 @@ def evaluate():
     import seaborn as sn
     plt.figure(figsize=(20, 10))
     sn.heatmap(cm, annot=True, cbar=True, xticklabels=labels, yticklabels=labels) # font size
-    plt.savefig('./img/cm_MLP.jpg')
+    plt.savefig(os.path.join(repo_path, './img/cm_MLP.jpg'))
     # plt.show()
 
 if __name__ == "__main__":
-
+    repo_path = os.path.dirname(os.path.abspath(__file__))
     number_epochs = 30
     bs = 512
     valid_size = 0.15
@@ -150,7 +150,7 @@ if __name__ == "__main__":
                                     # transforms.Lambda(lambda x: x + 0.1 * torch.rand(x.shape))
                                     ])
   
-    dataset = FashionMNIST("./data/", train=True, transform=transform_train, download=True)
+    dataset = FashionMNIST(os.path.join(repo_path, "./data/"), train=True, transform=transform_train, download=True)
     
     num_train = len(dataset)
     indices = list(range(num_train))
@@ -188,9 +188,9 @@ if __name__ == "__main__":
     plt.figure()
     plt.plot(track_loss)
     plt.title("training-loss-MLP")
-    plt.savefig("./img/training_loss_mlp.jpg")
+    plt.savefig(os.path.join(repo_path, "./img/training_loss_mlp.jpg"))
 
-    torch.save(model.state_dict(), "./models/MLP.pt")
-    print('Model saved to: ', './models/MLP.pt')
+    torch.save(model.state_dict(), os.path.join(repo_path, "./models/MLP.pt"))
+    print('Model saved to: ', os.path.join(repo_path, './models/MLP.pt'))
 
     # evaluate()

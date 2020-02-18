@@ -22,10 +22,6 @@ from torchvision import transforms
 
 
 def test(model, testloader):
-    """ Training the model using the given dataloader for 1 epoch.
-
-    Input: Model, Dataset, optimizer,
-    """
 
     model.eval()
 
@@ -51,35 +47,38 @@ def test(model, testloader):
 
 
 if __name__ == "__main__":
-
+    repo_path = os.path.dirname(os.path.abspath(__file__))
     trans_img = transforms.Compose([
                                     transforms.ToTensor(),
                                     transforms.Normalize([0], [0.5])
                                     ])
 
-    dataset = FashionMNIST("./data/", train=False, transform=trans_img, download=True)
+    dataset = FashionMNIST(os.path.join(repo_path, "./data/"), train=False, transform=trans_img, download=True)
     testloader = DataLoader(dataset, batch_size=512, shuffle=False)
 
     from train_multi_layer import MLP
     model_MLP = MLP(10)
-    model_MLP.load_state_dict(torch.load("./models/MLP.pt", map_location=torch.device('cpu')))
+    model_MLP.load_state_dict(torch.load(os.path.join(repo_path, "./models/MLP.pt"), map_location=torch.device('cpu')))
 
     from training_conv_net import CNN
     model_conv_net = CNN(10)
-    model_conv_net.load_state_dict(torch.load("./models/CNN.pt", map_location=torch.device('cpu')))
+    model_conv_net.load_state_dict(torch.load(os.path.join(repo_path, "./models/CNN.pt"), map_location=torch.device('cpu')))
 
     loss, gt, pred = test(model_MLP, testloader)
-    with open("multi-layer-net.txt", 'w') as f:
+    with open(os.path.join(repo_path, "multi-layer-net.txt"), 'w') as f:
         f.write("Loss on Test Data : {}\n".format(loss))
         f.write("Accuracy on Test Data : {}\n".format(np.mean(np.array(gt) == np.array(pred))))
         f.write("gt_label,pred_label \n")
         for idx in range(len(gt)):
             f.write("{},{}\n".format(gt[idx], pred[idx]))
+    print('Results saved to file', 'multi-layer-net.txt')
 
     loss, gt, pred = test(model_conv_net, testloader)
-    with open("convolution-neural-net.txt", 'w') as f:
+    with open(os.path.join(repo_path, "convolution-neural-net.txt"), 'w') as f:
         f.write("Loss on Test Data : {}\n".format(loss))
         f.write("Accuracy on Test Data : {}\n".format(np.mean(np.array(gt) == np.array(pred))))
         f.write("gt_label,pred_label \n")
         for idx in range(len(gt)):
             f.write("{},{}\n".format(gt[idx], pred[idx]))
+    print('Results saved to file', 'convolution-neural-net.txt')
+
