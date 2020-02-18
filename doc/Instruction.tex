@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\usepackage{color}
+\usepackage{tikzsymbols}
+
+\title{Deep Learning - Project II}
+\author{TA: Aditya, Anirban, Lokesh}
+\date{February 02, 2020}
+
+\begin{document}
+
+\maketitle
+
+\section*{Instructions}
+
+\begin{itemize}
+    \item This is a coding assignment. The code has to be written in Python. You have to use \textbf{Python $>=$ 3}, \textbf{pytorch $>=$ 1.2} and \textbf{tensorflow $>=$ 2.0} to solve all the problems. Please mention the version you have used in the report.
+    
+    \item The assignment deliverable is your python code, saved model and your report of observations.
+    
+    \item A google form will be sent through Piazza. You need to fill the form with your github repository details.
+        
+    \item You are encouraged to discuss among yourselves, but \textbf{DO NOT COPY} solutions or code. The consequences will be severe.
+    
+    \item Read the complete assignment carefully, before attempting to solve it.
+    
+    \item Follow the instructions provided for test execution of your code, the formats for input and output files and the naming conventions. \hyperlink{instruction}{ \color{blue}\footnotesize | Detailed Instructions}
+    
+    \item The submission deadline is \textbf{Feb 19, 2020}.
+\end{itemize}
+
+\quad \quad{\framebox{\textbf{Best of luck for the assignment. HAPPY CODING!}}}
+
+
+\section*{\hypertarget{instruction}How to run}
+ You should use the testdata given in the API (pytorch/tensorflow) to test your code and output the answers to files \texttt{multi-layer-net.txt} and \texttt{convolution-neural-net.txt}.
+
+\noindent To test the model we run the code :\\
+\texttt{python main.py}\\
+
+Note that you should use the saved models when obtaining the output on the test data.
+
+\section*{Assignment Deliverables and Evaluation of Project Report}
+
+\begin{itemize}
+    
+    \item Prepare a report and name it \texttt{Deep\_Learning\_Report\_2.pdf}. In your report, you need to briefly describe what you have done, present the results (in a form you think is good) and provide a brief discussion of the results you obtained. Please feel free to play with the model architecture and hyper-parameter settings. Please make it concise and to-the-point.
+
+    \item The name of output file for various tasks needs to be \textbf{multi-layer-net.txt} and \textbf{convolution-neural-net.txt}. Put them into the same directory of \textit{main.py} file.
+    
+    \item You need to save the trained model in a specific format and put it in \textit{model} directory. During test time, your code should use this saved model and not retrain it from scratch.
+    
+    \item Designing machine learning models, especially deep learning models is more of an art than a science. Hence, we would evaulate your report based on your answers to the following questions -
+\begin{itemize}
+\item What made you choose your current architecture?
+\item What guided your choice of hyperparameters - number of neurons/layers, activation function, learning rate etc.?
+\item How did you validate your model? - Note that validating the model is different from testing it!!
+\end{itemize}
+
+There are no right answers to these questions and the answers are based on judgement. Higher credit will be given to answers which are more logically/rationally grounded. For example, the reasoning:
+
+\begin{quote}
+I have chosen ResNet because it allows having large number of layers without problems such as vanishing gradients, etc.  
+\end{quote}
+
+is better than
+
+\begin{quote}
+I have chosen this architecture because $XYZ$ used it.
+\end{quote}
+\end{itemize}
+
+
+\section*{Starter Code}
+
+A starter code will be provided. The output files should have the same format as the one provided in this repo.
+
+\end{document}
