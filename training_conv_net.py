@@ -176,7 +176,7 @@ def evaluate():
 if __name__ == "__main__":
     repo_path = os.path.dirname(os.path.abspath(__file__))
 
-    number_epochs = 30
+    number_epochs = 60
     bs = 512
     valid_size = 0.15
 
